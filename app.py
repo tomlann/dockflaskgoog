@@ -1,13 +1,17 @@
 import os
 
-from flask import Flask
+from flask import Flask, request, send_file
+from model import extend
+
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    target = os.environ.get('TARGET', 'World')
-    return 'Hello {}!\n'.format(target)
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'GET':
+        return send_file('index.html')
+    data = request.form.get('text')
+    return extend(data)
 
 @app.route('/home/<name>')  
 def home(name):  
