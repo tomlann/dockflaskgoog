@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, request, send_file
-from model import extend
 
 
 app = Flask(__name__)
@@ -10,8 +9,6 @@ app = Flask(__name__)
 def index():
     if request.method == 'GET':
         return send_file('index.html')
-    data = request.form.get('text')
-    return extend(data)
 
 @app.route('/home/<name>')  
 def home(name):  
